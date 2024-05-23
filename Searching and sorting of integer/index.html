@@ -1,0 +1,98 @@
+<!DOCTYPE html
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport"="width=devicewidth, initial-=1.0">
+    <title>Sort Numbers</title    <link rel="stylesheet" hrefhttps://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+        .container {
+            margin-top: 20px;
+        }
+
+        #numbersList, #sortedNumbers {
+            margin-top: 10px;
+            font-size: 1.2rem;
+            line-height: 1.5;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        #addBtn, #sortBtn {
+            margin-top: 10px;
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+        #addBtn:hover, #sortBtn:hover {
+            background-color: #0069d9;
+            border-color: #0062cc;
+        }
+
+        #addBtn:focus, #sortBtn:focus {
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Sort Numbers</h2>
+        <div class="row">
+            <div class="col-md-6">
+                <h3>Add Numbers</h3>
+                <input type="number" id="numberInput" class="form-control">
+                <button id="addBtn" class="btn btn-primary mt-2">Add</button>
+                <p id="numbersList"></p>
+            </div>
+            <div class="col-md-6">
+                <h3>Sorted Numbers</h3>
+                <p id="sortedNumbers"></p>
+                <button id="sortBtn" class="btn btn-primary mt-2">Sort</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        let numbers = [];
+
+        function addNumber(number) {
+            numbers.push(number);
+            updateNumbersList();
+        }
+
+        function updateNumbersList() {
+            let numbersList = '';
+            for (let i = 0; i < numbers.length; i++) {
+                numbersList += `${numbers[i]} `;
+            }
+            $('#numbersList').text(numbersList);
+        }
+
+        function sortNumbers() {
+            numbers.sort((a, b) => a - b);
+            updateSortedNumbers();
+        }
+
+        function updateSortedNumbers() {
+            let sortedNumbers = '';
+            for (let i = 0; i < numbers.length; i++) {
+                sortedNumbers += `${numbers[i]} `;
+            }
+            $('#sortedNumbers').text(sortedNumbers);
+        }
+
+        $('#addBtn').click(() => {
+            const numberInput = $('#numberInput');
+            const number = parseFloat(numberInput.val());
+            if (!isNaN(number)) {
+                addNumber(number);
+                numberInput.val('');
+            }
+        });
+
+        $('#sortBtn').click(() => {
+            sortNumbers();
+        });
+    </script>
+</body>
+</html>
